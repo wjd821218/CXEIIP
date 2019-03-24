@@ -567,6 +567,11 @@ namespace EIIP.DAO
                 throw e;
             }
         }
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string Errmsg)
+        {
+            Errmsg = "";
+            return "";            
+        }
         public object ExecuteScalar(string QueryString)
 		{
 			cmd.CommandType = CommandType.Text;

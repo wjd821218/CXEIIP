@@ -335,6 +335,7 @@ namespace EIIP.DAO
         /// <param name="ParametersType">数组参数类别</param>
         /// <param name="ParametersDirection">数组参数方向</param>        
         /// <returns>int</returns>
+        string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string Errmsg);
         DataTable ExecuteSPForDtl(string StoredProcedureName, string[] ParametersNames, object[] ParametersValue);
 
         ///<summary>

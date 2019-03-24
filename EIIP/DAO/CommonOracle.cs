@@ -490,6 +490,7 @@ namespace EIIP.DAO
                 return msg;
         }
         #endregion
+        
         public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection)
         {
             int iReturnValue = 0 ;
@@ -519,6 +520,48 @@ namespace EIIP.DAO
             catch (Exception e)
             {
                 throw e;                
+            }
+        }
+
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection,out string Errmsg)
+        {
+            int iReturnValue = 0;
+            int iOutValue = 0;
+
+            try
+            {
+                this.cmd.Parameters.Clear();
+                this.cmd.CommandText = StoredProcedureName;
+                this.cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < Parameters.Length; i++)
+                {
+                    OracleParameter myParm = new OracleParameter(
+                        Parameters[i],
+                        (OracleDbType)Enum.Parse(typeof(OracleDbType), ParametersType[i].ToString()),40
+                        );                    
+                    if (ParametersDirection[i].ToString() == "Input")
+                        myParm.Value = ParametersValue[i].ToString();
+                    if (ParametersDirection[i].ToString() == "ReturnValue")
+                    { myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                      iReturnValue = i;
+                    }
+                    if (ParametersDirection[i].ToString() == "Output")
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iOutValue = i;
+                    }
+                    this.cmd.Parameters.Add(myParm);
+
+                }
+                this.cmd.ExecuteNonQuery();
+                
+                Errmsg = this.cmd.Parameters[iOutValue].Value.ToString();
+                return this.cmd.Parameters[iReturnValue].Value.ToString();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
         #endregion

@@ -68,6 +68,25 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -144,6 +163,12 @@
     <Compile Include="BasicLibrary\frmBasicListBase.Designer.cs">
       <DependentUpon>frmBasicListBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Basic\frmBasicSel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmBasicSel.Designer.cs">
+      <DependentUpon>frmBasicSel.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicLibrary\frmDept.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,11 +208,47 @@
     </Compile>
     <Compile Include="Basic\Common.cs" />
     <Compile Include="Basic\ComStruct.cs" />
+    <Compile Include="Basic\frmSelArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelArt.Designer.cs">
+      <DependentUpon>frmSelArt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmSelCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelCust.Designer.cs">
+      <DependentUpon>frmSelCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmSelDept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelDept.Designer.cs">
+      <DependentUpon>frmSelDept.cs</DependentUpon>
+    </Compile>
     <Compile Include="Basic\frmSelectOtherData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Basic\frmSelectOtherData.Designer.cs">
       <DependentUpon>frmSelectOtherData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\frmBaseBusiness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\frmBaseBusiness.Designer.cs">
+      <DependentUpon>frmBaseBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Purchase\frmPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\Purchase\frmPurchaseOrder.Designer.cs">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Business\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Base64.cs" />
     <Compile Include="Common\Global.cs" />
@@ -375,6 +436,9 @@
     <EmbeddedResource Include="BasicLibrary\frmBasicListBase.resx">
       <DependentUpon>frmBasicListBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmBasicSel.resx">
+      <DependentUpon>frmBasicSel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BasicLibrary\frmDept.resx">
       <DependentUpon>frmDept.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,8 +457,26 @@
     <EmbeddedResource Include="Basic\BsCustClass.resx">
       <DependentUpon>BsCustClass.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmSelArt.resx">
+      <DependentUpon>frmSelArt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmSelCust.resx">
+      <DependentUpon>frmSelCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmSelDept.resx">
+      <DependentUpon>frmSelDept.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Basic\frmSelectOtherData.resx">
       <DependentUpon>frmSelectOtherData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\frmBaseBusiness.resx">
+      <DependentUpon>frmBaseBusiness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\Purchase\frmPurchaseOrder.resx">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Delivery\fDeliverStoreReport.resx">
       <DependentUpon>fDeliverStoreReport.cs</DependentUpon>
@@ -453,6 +535,7 @@
     <EmbeddedResource Include="PrintReport\ReceiptReport.resx">
       <DependentUpon>ReceiptReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -499,6 +582,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Business\Sale\" />
     <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>

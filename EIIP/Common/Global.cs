@@ -317,8 +317,11 @@ namespace EIIP.Common
             //public static ArrayList ASN_TYPE = Get_ASN_Type();
             public static string gUserName = null;
             public static UserInfo tUser = new UserInfo();
+            public static int iDeptId = 0;
+            public static int iBranchDeptId = 0;
+            public static string iBranchDeptName = "";
 
-            public static string ZoneGroup = null;
+        public static string ZoneGroup = null;
             public static string ZoneGroup_Code = null;
 
             public static string Warehouse = null;

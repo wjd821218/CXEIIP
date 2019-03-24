@@ -15,6 +15,7 @@ using EIIP.Report;
 using EIIP.DAO;
 using EIIP;
 using EIIP.BasicLibrary;
+using EIIP.Basic;
 
 namespace EIIP
 {
@@ -22,6 +23,7 @@ namespace EIIP
     {
         public DataTable pDTMain;
         public DataTable pDTMainL;
+        public int iDeptId = 0;
         //public static UserInfo tUser = new UserInfo();
         //public DataSet myDs;
         public frmMain()
@@ -205,6 +207,40 @@ namespace EIIP
         private void tv_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             MenuDoubleClicked(e.Node, e);
+        }
+
+        private void GetDept()
+        {
+            string sFilter = txtDept.Text.Trim();
+            string sFilterSql =
+                "SELECT DEPTID,DEPTNAME FROM T_DEPT   WHERE  DEPTNAME LIKE '%" + sFilter + "%'";
+
+            if (txtDept.Text.Trim() != "")
+            {
+                frmSelDept ofrmSelDept = new frmSelDept();
+                ofrmSelDept.ShowSelectData(sFilterSql);
+                ofrmSelDept.ShowDialog(this);
+
+                if (ofrmSelDept.DialogResult == DialogResult.OK)
+                {
+                    Global.iDeptId = int.Parse(((DataRowView)(ofrmSelDept.gridView1.GetFocusedRow())).Row["DEPTID"].ToString());
+                    lblDept.Text = ((DataRowView)(ofrmSelDept.gridView1.GetFocusedRow())).Row["DEPTNAME"].ToString();
+                    txtDept.Text = lblDept.Text;
+                }   
+            }
+        }
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            GetDept();
+        }
+
+        private void txtDept_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                GetDept();
+            }
+
         }
     }
 }

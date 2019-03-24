@@ -601,6 +601,42 @@ namespace EIIP.DAO
         {
             return "";
         }
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection,out string Errmsg)
+        {
+            int iReturnValue = 0;
+            int iOutValue = 0;
+
+            try
+            {
+                this.cmd.Parameters.Clear();
+                this.cmd.CommandText = StoredProcedureName;
+                this.cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < Parameters.Length; i++)
+                {
+                    SqlParameter myParm = new SqlParameter();
+                    myParm.ParameterName = Parameters[i];
+                    //myParm.OracleDbType = (OracleDbType)Enum.Parse(typeof(OracleDbType), ParametersType[i].ToString());
+                    myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString()); ;
+                    if (ParametersDirection[i].ToString() == "Input")
+                        myParm.Value = ParametersValue[i].ToString();
+                    if (ParametersDirection[i].ToString() == "ReturnValue")
+                        iReturnValue = i;
+                    if (ParametersDirection[i].ToString() == "Output")
+                        iOutValue = i;
+                    this.cmd.Parameters.Add(myParm);
+
+                }
+                this.cmd.ExecuteNonQuery();
+
+                Errmsg = this.cmd.Parameters[iOutValue].Value.ToString();
+                return this.cmd.Parameters[iReturnValue].Value.ToString();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         #region 执行存储过程返回DataTable ExecuteSPForDtl
 
             /// <summary>
